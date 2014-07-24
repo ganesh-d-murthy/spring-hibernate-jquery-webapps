@@ -23,21 +23,25 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Customer> getCustomersByYear(int year, int start, int limit) {		
 		return customerDao.getCustomers("", start, limit);
 	}
 	
 	@Override
+	@Transactional(readOnly = true)	
 	public Customer getCustomer(Integer id) {
 		return customerDao.getCustomer(id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)	
 	public Integer getCustomersCount() {
 		return customerDao.getCustomersCount();
 	}
 	
 	@Override
+	@Transactional(readOnly = true)	
 	public List<Customer> getCustomers(String firstName, int year, int start, int limit) {
 		return customerDao.getCustomers(year, firstName, start, limit);
 	}

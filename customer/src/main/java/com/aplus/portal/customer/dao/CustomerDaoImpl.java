@@ -20,7 +20,6 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.aplus.portal.customer.bo.Customer;
 
@@ -31,7 +30,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public int saveCustomer(Customer customer) {
 		Session session = sessionFactory.getCurrentSession();
 		customer.setUpdateTime(Calendar.getInstance().getTime());
@@ -39,14 +37,13 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	@Transactional
+
 	public Customer getCustomer(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Customer) session.get(Customer.class, id);
 	}
 
 	@Override
-	@Transactional
 	public List<Customer> getCustomers(String firstname, int start, int limit) {
 		Session session = sessionFactory.getCurrentSession();
 		List<Customer> customers = session.createQuery("from Customer").list();
@@ -54,7 +51,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	@Transactional
 	public int getCustomersCount() {
 		Session session = sessionFactory.getCurrentSession();
 		Number count = (Number) session.createQuery(
@@ -63,7 +59,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	@Transactional
 	public List<Customer> getCustomers(int year, String firstName, int start,
 			int limit) {
 		Session session = sessionFactory.getCurrentSession();
@@ -91,7 +86,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	@Transactional
 	public int deleteCustomer(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("delete from Customer where id=:id");
@@ -100,7 +94,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	@Transactional
 	public int updateCustomer(Customer customer) {
 		Session session = sessionFactory.getCurrentSession();
 		Customer existingCustomer = (Customer) session.get(Customer.class,
@@ -141,7 +134,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	@Transactional
 	public void uploadFile(InputStream inputStream, String fileName,
 			String contentType, Integer id) {
 		Blob blob = null;
